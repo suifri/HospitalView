@@ -1,0 +1,9 @@
+span{
+    font-size: large;
+    font-weight: 300;
+}
+
+.custom-mat-card{
+    font-weight: 300 !important;
+    font-size: 25px;
+}

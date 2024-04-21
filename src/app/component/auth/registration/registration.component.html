@@ -1,0 +1,86 @@
+<mat-vertical-stepper [linear]="false" #stepper [animationDuration] = this.duration class="stepper" title= {{this.title}}>
+    <mat-step [stepControl]="firstFormGroup" class="customStep">
+        <mat-grid-list cols="1">
+            <mat-grid-tile>
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Fill out your name, phone, email and gender</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="First name" formControlName="fName" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Last name" formControlName="lName" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="email" formControlName="email" required>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="password" formControlName="password" required type="password">
+          </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="mobile" formControlName="mobile" required>
+        </mat-form-field>
+
+          <br>
+
+          <mat-radio-group aria-label="Select a gender" color="primary" formControlName="gender">
+              <mat-radio-button class="custom-radio-button" value="male">Male</mat-radio-button>
+              <mat-radio-button class="custom-radio-button" value="female">Female</mat-radio-button>
+          </mat-radio-group>
+
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-grid-tile>
+    </mat-grid-list>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup">
+    <mat-grid-list cols="1">
+        <mat-grid-tile>
+            <div class="inputBox">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Fill out your medicine data</ng-template>
+        <mat-form-field>
+            <mat-label>Select your condition</mat-label>
+            <mat-select formControlName="condition" name="condition">
+                <mat-option *ngFor="let condition of conditions" [value]="condition">{{condition}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Select your blood type</mat-label>
+            <mat-select formControlName="bloodType" name="bloodType">
+                <mat-option *ngFor="let bloodType of bloodTypes" [value]="bloodType">{{bloodType}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <br>
+        <mat-label>Select a rhesus</mat-label>
+        <br>
+        <mat-radio-group aria-label="Select a rhesus" color="primary" formControlName="rhesus">
+            <mat-radio-button class="custom-radio-button" value="positive">Positive</mat-radio-button>
+            <mat-radio-button class="custom-radio-button" value="negative">Negative</mat-radio-button>
+        </mat-radio-group>
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+            </div>
+    </mat-grid-tile>
+    </mat-grid-list>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      You are now done.
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="signUp()">Sign Up</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>

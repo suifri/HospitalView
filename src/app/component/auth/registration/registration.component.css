@@ -1,0 +1,14 @@
+.stepper{
+    width: 500px;
+    height: 570px;
+}
+
+.inputBox
+{
+    display: block;
+}
+
+.customStep{
+    height: 600px;
+    width: 510;
+}

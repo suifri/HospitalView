@@ -1,0 +1,62 @@
+<h2 mat-dialog-title>{{title}}</h2>
+<mat-divider></mat-divider>
+
+<mat-dialog-content [formGroup]="form" class="custom-dialog-content">
+    <mat-grid-list cols="2">
+
+        <mat-grid-tile>
+            <div>
+                <mat-form-field>
+                    <mat-label>Enter your full name</mat-label>
+                    <input matInput placeholder="Illia Khveshchuk" formControlName = "name" required>
+
+                      <mat-error *ngIf="form.get('name')?.invalid || form.get('name')?.dirty || form.get('name')?.touched">Enter full name</mat-error>
+
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Mobile number</mat-label>
+                    <input matInput placeholder="9865452152" formControlName = "mobile" required>
+
+                      <mat-error *ngIf="form.get('mobile')?.invalid || form.get('mobile')?.dirty || form.get('mobile')?.touched">Enter valid mobile</mat-error>
+
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Enter your email</mat-label>
+                    <input matInput placeholder="pat@example.com" formControlName = "email" required>
+
+                      <mat-error *ngIf="form.get('email')?.invalid || form.get('email')?.dirty || form.get('email')?.touched">Enter valid email</mat-error>
+
+                  </mat-form-field>
+
+            </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <div>
+                <mat-label>Gender</mat-label>
+                <br>
+                <mat-radio-group aria-label="Select a gender" color="primary" formControlName="gender">
+                    <mat-radio-button class="custom-radio-button" value="male">Male</mat-radio-button>
+                    <mat-radio-button class="custom-radio-button" value="female">Female</mat-radio-button>
+                </mat-radio-group>
+
+                  <mat-form-field>
+                    <mat-label>Admission date</mat-label>
+                    <input matInput [matDatepicker]="picker">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+
+            </div>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="cancelEditing()">Cancel</button>
+    <button mat-raised-button color="primary" mat-dialog-close (click)="updatePatient()" [disabled]="form.invalid">{{this.buttonName}}</button>
+  </mat-dialog-actions>
