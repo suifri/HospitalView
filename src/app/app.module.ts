@@ -36,6 +36,14 @@ import { ViewPatientComponent } from './component/dashboard/patient/view-patient
 import { LoginComponent } from './component/auth/login/login.component';
 import { RegistrationComponent } from './component/auth/registration/registration.component';
 import {MatStepperModule} from '@angular/material/stepper';
+import { PatientSidebarComponent } from './component/patient-sidebar/patient-sidebar.component';
+import { HomeComponent } from './component/patient-sidebar/home/home.component';
+import { BillsComponent } from './component/patient-sidebar/bills/bills.component';
+import { AddAppointmentComponent } from './component/patient-sidebar/add-appointment/add-appointment.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { DoctorSidebarComponent } from './component/doctor-sidebar/doctor-sidebar.component';
+import { DoctorHomeComponent } from './component/doctor-sidebar/doctor-home/doctor-home.component';
+
 
 @NgModule({
   declarations: [
@@ -50,7 +58,13 @@ import {MatStepperModule} from '@angular/material/stepper';
     DeletePatientComponent,
     ViewPatientComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    PatientSidebarComponent,
+    HomeComponent,
+    BillsComponent,
+    AddAppointmentComponent,
+    DoctorSidebarComponent,
+    DoctorHomeComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +91,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatTableModule,
     MatPaginatorModule,
     MatMenuModule,
-    MatStepperModule
+    MatStepperModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent],

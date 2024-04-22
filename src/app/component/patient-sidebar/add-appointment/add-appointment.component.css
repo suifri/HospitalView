@@ -1,0 +1,8 @@
+.custom-dialog-content{
+    width: 650px;
+    /* height: 500px !important; */
+}
+
+.mat-grid-list{
+    overflow: hidden;
+}

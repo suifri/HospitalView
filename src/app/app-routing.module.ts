@@ -6,8 +6,18 @@ import { LoginComponent } from './component/auth/login/login.component';
 import { ViewDoctorComponent } from './component/dashboard/doctor/view-doctor/view-doctor.component';
 import { ViewPatientComponent } from './component/dashboard/patient/view-patient/view-patient.component';
 import { AuthguardGuard } from './shared/guard/authguard.guard';
+import { HomeComponent } from './component/patient-sidebar/home/home.component';
+import { BillsComponent } from './component/patient-sidebar/bills/bills.component';
+import { DoctorHomeComponent } from './component/doctor-sidebar/doctor-home/doctor-home.component';
 
 const routes: Routes = [
+  {path: 'doctorDashboard', children:[
+    {path: 'home', component: DoctorHomeComponent}
+  ]},
+  {path: 'patientDashboard', children:[
+    {path:'home', component: HomeComponent},
+    {path:'bills', component: BillsComponent}
+  ]},
 {path: 'dashboard', children: [
   {path: '', redirectTo: 'patient', pathMatch: 'full'},
   {path: 'patient', component: PatientComponent},

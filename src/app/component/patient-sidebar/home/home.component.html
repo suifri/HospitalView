@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 mt-3">
+            <mat-card class="makeAppointment" (click)="addAppointment()">
+                <mat-card-content class="custom-mat-card">
+                    New Appointment <br>
+                    <mat-icon>calendar_month</mat-icon>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+    <br>
+    <mat-divider></mat-divider>
+
+    <mat-card class="m-3">
+        <mat-card-title class="custom-mat-card">
+            <!-- {{patient.patientFName + ' ' + patient.patientLName}} test -->
+            test
+        </mat-card-title>
+
+        <mat-card-subtitle>
+                <!-- {{patient.condition}} test -->
+                test
+        </mat-card-subtitle>
+
+        <mat-divider></mat-divider>
+
+        <div class="row pt-3">
+            <div class="col-md-6">
+                <mat-card-content>
+                    <span>Email:</span> <br>
+                </mat-card-content>
+
+                <mat-card-content>
+                    <span>Phone:</span> <br>
+                </mat-card-content>
+
+                <mat-card-content>
+                    <span>Admission date:</span> <br>
+                </mat-card-content>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <mat-card-content>
+                <span> Gender: </span> <br>
+                <span> Blood type: </span> <br>
+                <span>Rhesus:</span> <br>
+                <span>Diagnosis:</span> <br>
+            </mat-card-content>
+        </div>
+
+    </mat-card>
+
+</div>

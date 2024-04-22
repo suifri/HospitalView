@@ -1,0 +1,40 @@
+<h2 mat-dialog-title>Make new appointment</h2>
+<mat-divider></mat-divider>
+
+
+<mat-dialog-content class="custom-dialog-content">
+    <mat-form-field>
+        <mat-label>Appointmant date</mat-label>
+        <input matInput [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <!-- <mat-error *ngIf="form.get('date_joining')?.invalid || form.get('date_joining')?.dirty || form.get('date_joining')?.touched">Enter valid date</mat-error> -->
+    </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Number</mat-label>
+          <input type="text"
+                 placeholder="Pick one"
+                 aria-label="Doctor"
+                 matInput
+                 [formControl]="myControl"
+                 [matAutocomplete]="auto">
+
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async; trackBy: trackByFn" [value]="option">
+                {{ option }}
+              </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Appointment hour</mat-label>
+            <input type="number" matInput [formControl]="myControl">
+        </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="cancelRegistration()">Cancel</button>
+    <button mat-raised-button color="primary" mat-dialog-close (click)="registerAppointment()">Make appointment</button>
+  </mat-dialog-actions>
