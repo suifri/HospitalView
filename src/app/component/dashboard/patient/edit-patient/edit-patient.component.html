@@ -7,10 +7,18 @@
         <mat-grid-tile>
             <div>
                 <mat-form-field>
-                    <mat-label>Enter your full name</mat-label>
-                    <input matInput placeholder="Illia Khveshchuk" formControlName = "name" required>
+                    <mat-label>Enter your first name</mat-label>
+                    <input matInput placeholder="Illia" formControlName = "firstName" required>
 
-                      <mat-error *ngIf="form.get('name')?.invalid || form.get('name')?.dirty || form.get('name')?.touched">Enter full name</mat-error>
+                      <mat-error *ngIf="form.get('fName')?.invalid || form.get('firstName')?.dirty || form.get('firstName')?.touched">Enter first name</mat-error>
+
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Enter your last name</mat-label>
+                    <input matInput placeholder="Khveshchuk" formControlName = "lastName" required>
+
+                      <mat-error *ngIf="form.get('lName')?.invalid || form.get('lastName')?.dirty || form.get('lastName')?.touched">Enter last name</mat-error>
 
                   </mat-form-field>
 

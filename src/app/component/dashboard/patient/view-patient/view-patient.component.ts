@@ -23,6 +23,9 @@ export class ViewPatientComponent implements OnInit{
   }
 
   getDoctorById(){
-    this.patientObj = this.dataApi.getPatientById(this.id);
+    this.dataApi.getPatientById(this.id).subscribe(
+      (data: Patient) => this.patientObj = data
+    );
+   
   }
 }

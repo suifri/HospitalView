@@ -11,10 +11,12 @@ export class EditPatientComponent implements OnInit {
 
   form !: FormGroup;
   title !: string;
-  name !: string;
+  fName !: string;
+  lName !: string;
   mobile !: string;
   email !: string;
   gender !: string;
+  admissionDate !: string;
   id !: string;
 
   buttonName !: string;
@@ -22,10 +24,12 @@ export class EditPatientComponent implements OnInit {
   constructor(private fb : FormBuilder, @Inject(MAT_DIALOG_DATA) data: any, private dialogRef: MatDialogRef<EditPatientComponent>)
   {
     this.title = data.title;
-    this.name = data.name;
+    this.fName = data.fName;
+    this.lName = data.lName;
     this.mobile = data.mobile;
     this.email = data.email;
     this.gender = data.gender;
+    this.admissionDate = data.admissionDate;
     this.id = data.id;
 
     this.buttonName = data.buttonName;
@@ -34,7 +38,8 @@ export class EditPatientComponent implements OnInit {
   ngOnInit(): void {
       this.form = this.fb.group({
         id: [this.id, []],
-        name: [this.name, []],
+        firstName: [this.fName, []],
+        lastName: [this.lName, []],
         mobile: [this.mobile, []],
         email: [this.email,[]],
         gender: [this.gender, []]

@@ -43,7 +43,8 @@ import { AddAppointmentComponent } from './component/patient-sidebar/add-appoint
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { DoctorSidebarComponent } from './component/doctor-sidebar/doctor-sidebar.component';
 import { DoctorHomeComponent } from './component/doctor-sidebar/doctor-home/doctor-home.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -92,7 +93,9 @@ import { DoctorHomeComponent } from './component/doctor-sidebar/doctor-home/doct
     MatPaginatorModule,
     MatMenuModule,
     MatStepperModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    HttpClientModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent],

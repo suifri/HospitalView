@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Patient } from '../model/patient';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientDataService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   addPatient()
   {
@@ -15,34 +16,21 @@ export class PatientDataService {
 
   getAllPatients()
   {
-
+    return this.http.get<Patient[]>('https://localhost:7065/patient/get');
   }
 
-  updatePatient()
+  updatePatient(patient: Patient)
   {
-
+    return this.http.put<Patient>('https://localhost:7065/Patient/Update', patient);
   }
 
-  deletePatient()
+  deletePatient(id: string)
   {
-
+    return this.http.delete('https://localhost:7065/Patient/Delete?id=' + id);
   }
 
   getPatientById(id: string)
   {
-      let test: Patient = {
-      id: 'vsdvabbv',
-      patientFName: 'Illia',
-      patientLName: 'Khveshchuk',
-      phone: '39287587325',
-      bloodType: 'AA',
-      email: 'Illia@gmail.com',
-      gender: 'male',
-      condition: 'critical',
-      diagnosis: 'COVID-19',
-      rhesus: true
-    };
-
-    return test;
+      return this.http.get<Patient>('https://localhost:7065/Patient/GetById?id=' + id,);
   }
 }

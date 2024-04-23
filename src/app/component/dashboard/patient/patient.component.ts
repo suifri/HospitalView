@@ -18,34 +18,30 @@ export class PatientComponent implements OnInit, AfterViewInit{
 
   patientsArr : Patient[] = [];
 
-  displayedColumns: string[] = ['name', 'email', 'gender', 'action'];
+  displayedColumns: string[] = ['name', 'email', 'gender', 'phone', 'condition', 'diagnosis', 'action'];
   dataSource !: MatTableDataSource<Patient>;
 
   @ViewChild(MatPaginator) paginator !: MatPaginator;
   @ViewChild(MatSort) sort !: MatSort;
 
-  test: Patient = {
-    id: 'vsdvabbv',
-    patientFName: 'Illia',
-    patientLName: 'Khveshchuk',
-    phone: '39287587325',
-    bloodType: 'AA',
-    email: 'Illia@gmail.com',
-    gender: 'male',
-    condition: 'critical',
-    diagnosis: 'COVID-19',
-    rhesus: true
-  };
-
   constructor(public dialog : MatDialog, private dataApi: PatientDataService, private _snackBar: MatSnackBar)
-  {}
+  {
+
+
+  }
 
   ngOnInit(): void {
-      this.dataSource = new MatTableDataSource(this.patientsArr);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
 
-      this.patientsArr.push(this.test);
+      this.dataApi.getAllPatients().subscribe({
+        next: (result) => {
+          this.dataSource = new MatTableDataSource<Patient>(result);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        },
+        error: (error) => console.error(error)
+      }
+      );
+
   }
 
   ngAfterViewInit(): void {
@@ -55,9 +51,15 @@ export class PatientComponent implements OnInit, AfterViewInit{
 
   getAllPatients()
   {
-      this.dataSource = new MatTableDataSource(this.patientsArr);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+    this.dataApi.getAllPatients().subscribe({
+      next: (result) => {
+        this.dataSource = new MatTableDataSource<Patient>(result);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+      error: (error) => console.error(error)
+    }
+    );
   }
 
   applyFilter(event: Event)
@@ -82,10 +84,19 @@ export class PatientComponent implements OnInit, AfterViewInit{
     dialogConfig.data = row;
     dialogConfig.data.title = 'Edit patient';
     dialogConfig.data.buttonName = 'Update';
+    dialogConfig.data.fName = row.patientFName;
+    dialogConfig.data.lName = row.patientLName;
+    dialogConfig.data.mobile = row.phone;
+    dialogConfig.data.gender = (row.gender as string).toLowerCase();
 
     const dialogRef = this.dialog.open(EditPatientComponent, dialogConfig);
 
-    //dialogRef.afterClosed() --add updating patient by ID
+    dialogRef.afterClosed().subscribe(data => {
+      this.dataApi.updatePatient(data).subscribe(() => this.getAllPatients());
+      this.openSnackBar("Doctor updated successfully.", "OK");
+    }
+      
+    );
   }
 
   deletePatient(row : any)
@@ -101,6 +112,11 @@ export class PatientComponent implements OnInit, AfterViewInit{
     }
 
     const dialogRef = this.dialog.open(DeletePatientComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(data => {
+      this.dataApi.deletePatient(row.id).subscribe(() => this.getAllPatients());
+      this.openSnackBar("Doctor deleted successfully.", "OK");
+    });
   }
 
   viewPatient(row : any)

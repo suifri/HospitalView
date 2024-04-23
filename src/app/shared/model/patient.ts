@@ -8,8 +8,8 @@ export interface Patient
     email: string;
     gender: string;
     condition: string;
-    admissionDate?: Date;
-    dischargeTime?: Date;
-    diagnosis: string;
+    admissionDate?: string;
+    dischargeTime?: string;
     rhesus: boolean;
+    diagnosis: string;
 }
