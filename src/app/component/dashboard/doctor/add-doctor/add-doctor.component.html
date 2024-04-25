@@ -7,59 +7,71 @@
         <mat-grid-tile>
             <div>
                 <mat-form-field>
-                    <mat-label>Enter your full name</mat-label>
-                    <input matInput placeholder="Illia Khveshchuk" formControlName = "name" required>
-
-                      <mat-error *ngIf="form.get('name')?.invalid || form.get('name')?.dirty || form.get('name')?.touched">Enter full name</mat-error>
+                    <mat-label>Enter your first name</mat-label>
+                    <input matInput placeholder="Illia" formControlName = "empFName" required>
 
                   </mat-form-field>
 
                   <mat-form-field>
-                    <mat-label>Mobile number</mat-label>
-                    <input matInput placeholder="9865452152" formControlName = "mobile" required>
-
-                      <mat-error *ngIf="form.get('mobile')?.invalid || form.get('mobile')?.dirty || form.get('mobile')?.touched">Enter valid mobile</mat-error>
+                    <mat-label>Enter your last name</mat-label>
+                    <input matInput placeholder="Khveshchuk" formControlName = "empLName" required>
 
                   </mat-form-field>
 
                   <mat-form-field>
                     <mat-label>Enter your email</mat-label>
                     <input matInput placeholder="pat@example.com" formControlName = "email" required>
+                  </mat-form-field>
 
-                      <mat-error *ngIf="form.get('email')?.invalid || form.get('email')?.dirty || form.get('email')?.touched">Enter valid email</mat-error>
-
+                  <mat-form-field>
+                    <mat-label>Enter your address</mat-label>
+                    <input matInput placeholder="Lviv, Lukasha 5" formControlName = "address" required>
                   </mat-form-field>
 
                   <mat-form-field>
                     <mat-label>Qualification</mat-label>
                     <input matInput placeholder="MBBS" formControlName = "qualification" required>
-
-                      <mat-error *ngIf="form.get('qualification')?.invalid || form.get('qualification')?.dirty || form.get('qualification')?.touched">Enter valid qualification</mat-error>
-
                   </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Specialization</mat-label>
+                    <input matInput placeholder="Cardiologist" formControlName = "specialization" required>
+                  </mat-form-field>
+
+
             </div>
         </mat-grid-tile>
 
         <mat-grid-tile>
             <div>
-                <mat-label>Gender</mat-label>
-                <br>
-                <mat-radio-group aria-label="Select a gender" color="primary" formControlName="gender">
-                    <mat-radio-button class="custom-radio-button" value="male">Male</mat-radio-button>
-                    <mat-radio-button class="custom-radio-button" value="female">Female</mat-radio-button>
-                </mat-radio-group>
+
+              <mat-form-field>
+                <mat-label>Employer type</mat-label>
+                <input matInput placeholder="Higher doctor" formControlName = "empType" required>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>SSN</mat-label>
+                <input matInput placeholder="SSN" formControlName = "ssn" required>
+              </mat-form-field>
 
                 <mat-form-field>
                     <mat-label>Department</mat-label>
-                    <mat-select formControlName="department" name="department">
+                    <mat-select formControlName="department" name="department" [(value)]="this.department">
                         <mat-option *ngFor="let department of departments" [value]="department">{{department}}</mat-option>
                     </mat-select>
-                    <mat-error *ngIf="form.get('department')?.invalid || form.get('department')?.dirty || form.get('department')?.touched">Enter valid department</mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Schedule</mat-label>
+                    <mat-select formControlName="scheduleId" name="scheduleId">
+                        <mat-option *ngFor="let schedule of this.listSchedules" [value]="schedule">{{schedule}}</mat-option>
+                    </mat-select>
                   </mat-form-field>
 
                   <mat-form-field>
                     <mat-label>Date joining</mat-label>
-                    <input matInput [matDatepicker]="picker">
+                    <input matInput [matDatepicker]="picker" formControlName="dateJoining">
                     <mat-hint>MM/DD/YYYY</mat-hint>
                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
@@ -74,5 +86,5 @@
 
 <mat-dialog-actions>
     <button mat-raised-button mat-dialog-close (click)="cancelRegistration()">Cancel</button>
-    <button mat-raised-button color="primary" mat-dialog-close (click)="registerDoctor()" [disabled]="form.invalid">{{this.buttonName}}</button>
+    <button mat-raised-button color="primary" mat-dialog-close (click)="registerDoctor()">{{this.buttonName}}</button>
   </mat-dialog-actions>

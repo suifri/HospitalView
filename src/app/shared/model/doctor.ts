@@ -1,14 +1,15 @@
 export interface Doctor 
 {
     id: string;
-    qualifications: string;
+    qualification: string;
     specialization: string;
     scheduleId: string;
     empFName: string;
     empLName: string;
-    dateJoining?: Date;
+    dateJoining?: string;
+    dateSeparation: string;
+    empType: string;
     email: string;
     address: string;
-    SSN: string;
-    departmentId: string;
+    ssn: number;
 }

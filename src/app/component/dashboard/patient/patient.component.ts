@@ -8,6 +8,7 @@ import { Patient } from 'src/app/shared/model/patient';
 import { PatientDataService } from 'src/app/shared/service/patient-data.service';
 import { EditPatientComponent } from './edit-patient/edit-patient.component';
 import { DeletePatientComponent } from './delete-patient/delete-patient.component';
+import { requestPatientDto } from 'src/app/shared/model/requestPatientDto';
 
 @Component({
   selector: 'app-patient',
@@ -92,8 +93,20 @@ export class PatientComponent implements OnInit, AfterViewInit{
     const dialogRef = this.dialog.open(EditPatientComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(data => {
-      this.dataApi.updatePatient(data).subscribe(() => this.getAllPatients());
-      this.openSnackBar("Doctor updated successfully.", "OK");
+
+      console.log(data);
+      let updatedPatient: requestPatientDto = {
+        id: data.id,
+        patientFName: data.firstName,
+        patientLName: data.lastName,
+        phone: data.mobile,
+        gender: data.gender,
+        admissionDate: data.admissionDate,
+        email: data.email
+      };
+      console.log(updatedPatient);
+      this.dataApi.updatePatient(updatedPatient).subscribe(() => this.getAllPatients());
+      this.openSnackBar("Patient updated successfully.", "OK");
     }
       
     );
@@ -115,7 +128,7 @@ export class PatientComponent implements OnInit, AfterViewInit{
 
     dialogRef.afterClosed().subscribe(data => {
       this.dataApi.deletePatient(row.id).subscribe(() => this.getAllPatients());
-      this.openSnackBar("Doctor deleted successfully.", "OK");
+      this.openSnackBar("Patient deleted successfully.", "OK");
     });
   }
 

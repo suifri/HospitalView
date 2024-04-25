@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -37,12 +37,13 @@ export class EditPatientComponent implements OnInit {
 
   ngOnInit(): void {
       this.form = this.fb.group({
-        id: [this.id, []],
-        firstName: [this.fName, []],
-        lastName: [this.lName, []],
-        mobile: [this.mobile, []],
-        email: [this.email,[]],
-        gender: [this.gender, []]
+        id: [this.id, [Validators.required]],
+        firstName: [this.fName, [Validators.required]],
+        lastName: [this.lName, [Validators.required]],
+        mobile: [this.mobile, [Validators.required]],
+        email: [this.email,[Validators.required]],
+        gender: [this.gender, [Validators.required]],
+        admissionDate: [this.admissionDate, [Validators.required]]
       })
   }
 

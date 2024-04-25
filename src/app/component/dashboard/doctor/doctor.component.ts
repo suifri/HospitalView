@@ -9,6 +9,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { Title } from '@angular/platform-browser';
 import { DeleteDoctorComponent } from './delete-doctor/delete-doctor.component';
+import { requestDoctorDTO } from 'src/app/shared/model/requestDoctorDto';
 
 @Component({
   selector: 'app-doctor',
@@ -20,20 +21,8 @@ export class DoctorComponent implements OnInit, AfterViewInit {
 
   doctorsArr : Doctor[] = [];
 
-  test: Doctor = {
-    id: '24facuca',
-    qualifications: "MBSS",
-    specialization: "Cardiologist",
-    scheduleId: 'feyahfa23',
-    empFName: 'Illia',
-    empLName: 'Khveshchuk',
-    email: 'illia@gmail.com',
-    address: 'Lukasha 5',
-    SSN: 'fgsilvha',
-    departmentId: 'afytfyia' 
-  }
 
-  displayedColumns: string[] = ['name', 'mobile', 'email', 'department', 'gender', 'action'];
+  displayedColumns: string[] = ['name', 'specialization', 'qualification', 'email', 'address', 'action'];
   dataSource !: MatTableDataSource<Doctor>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -44,12 +33,15 @@ constructor(public dialog: MatDialog, private dataApi : DataService, private _sn
 
 ngOnInit(): void {
 
-  this.dataSource = new MatTableDataSource(this.doctorsArr);
-
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-
-    this.doctorsArr.push(this.test);
+  this.dataApi.getAllDoctors().subscribe({
+    next: (result) => {
+      this.dataSource = new MatTableDataSource<Doctor>(result);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    },
+    error: (error) => console.error(error)
+  });
+   
 }
 
 ngAfterViewInit(): void{
@@ -72,7 +64,24 @@ addDoctor()
 
   dialogRef.afterClosed().subscribe(data => {
     if(data){
-      this.dataApi.addDoctor(data);
+
+      let test: requestDoctorDTO ={
+        departmentID: data.departmentId,
+        empFName: data.empFName,
+        empLName: data.empLName,
+        email: data.email,
+        specialization: data.specialization,
+        dateJoining: (data.dateJoining as Date).getFullYear().toString() + '/' + 
+        (data.dateJoining as Date).getMonth().toString() + '/' + (data.dateJoining as Date).getDay().toString(),
+        qualifications: data.qualification,
+        address: data.address,
+        ssn: data.ssn,
+        empType: data.empType,
+        scheduleId: data.scheduleId
+      };
+
+      this.dataApi.addDoctor(test).subscribe(r => {});
+      this.getAllDoctors();
       this.openSnackBar("Registration of doctor is successful.", "OK")
     }
   } )
@@ -80,10 +89,15 @@ addDoctor()
 
 getAllDoctors(){
 
+  this.dataApi.getAllDoctors().subscribe({
+    next: (result) => {
+      this.dataSource = new MatTableDataSource<Doctor>(result);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    },
+    error: (error) => console.error(error)
+  });
 
-  this.dataSource = new MatTableDataSource(this.doctorsArr);
-  this.dataSource.paginator = this.paginator;
-  this.dataSource.sort = this.sort;
 }
 
 public applyFilter(event: Event){
@@ -112,11 +126,29 @@ public editDoctor(row : any){
   dialogConfig.data = row;
   dialogConfig.data.title = 'Edit doctor';
   dialogConfig.data.buttonName = 'Update';
-  //dialogConfig.data.birthdate = row.birthdate.toDate();
 
   const dialogRef = this.dialog.open(AddDoctorComponent, dialogConfig);
 
-  //dialogRef.afterClosed() --add updating doctor by API
+  dialogRef.afterClosed().subscribe(data=>{
+    let test: requestDoctorDTO ={
+      departmentID: data.departmentId,
+      empFName: data.empFName,
+      empLName: data.empLName,
+      email: data.email,
+      specialization: data.specialization,
+      dateJoining: (data.dateJoining as Date).getFullYear().toString() + '/' + 
+      (data.dateJoining as Date).getMonth().toString() + '/' + (data.dateJoining as Date).getDay().toString(),
+      qualifications: data.qualification,
+      address: data.address,
+      ssn: data.ssn.toString(),
+      empType: data.empType,
+      scheduleId: data.scheduleId,
+      Id: data.id
+    };
+    console.log(test);
+    this.dataApi.updateDoctor(test).subscribe();
+    this.openSnackBar("Updating of doctor is successful.", "OK")
+  });
 }
 
 deleteDoctor(row : any)
@@ -132,6 +164,11 @@ deleteDoctor(row : any)
   }
 
   const dialogRef = this.dialog.open(DeleteDoctorComponent, dialogConfig);
+
+  dialogRef.afterClosed().subscribe(data => {
+    this.dataApi.deleteDoctor(row.id).subscribe(() => this.getAllDoctors());
+    this.openSnackBar("Doctor deleted successfully.", "OK");
+  });
 }
 
 viewDoctor(row : any)

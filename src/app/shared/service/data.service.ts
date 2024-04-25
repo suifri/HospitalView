@@ -1,45 +1,35 @@
 import { Injectable } from '@angular/core';
 import { Doctor } from '../model/doctor';
+import { HttpClient } from '@angular/common/http';
+import { requestDoctorDTO } from '../model/requestDoctorDto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  public addDoctor(doctor : Doctor) : void
+  public addDoctor(doctor : requestDoctorDTO)
   {
-
+    return this.http.post('https://localhost:7065/Doctor/Add', doctor);
   }
 
   getAllDoctors(){
-    
+    return this.http.get<Doctor[]>('https://localhost:7065/Doctor/GetAll');
   }
 
-  updateDoctor(doctor: Doctor)
+  updateDoctor(doctor: requestDoctorDTO)
   {
-    return; //add doctor update
+    return this.http.patch('https://localhost:7065/Doctor/Update', doctor); 
   }
 
   deleteDoctor(id : string){
-    //add doctor deletin
+    return this.http.delete('https://localhost:7065/Doctor/Delete?id=' + id);
   }
 
   getDoctorById(id: string)
   {
-     let test: Doctor = {
-      id: '24facuca',
-      qualifications: "MBSS",
-      specialization: "Cardiologist",
-      scheduleId: 'feyahfa23',
-      empFName: 'Illia',
-      empLName: 'Khveshchuk',
-      email: 'illia@gmail.com',
-      address: 'Lukasha 5',
-      SSN: 'fgsilvha',
-      departmentId: 'afytfyia' 
-    }
-    return test;
+    return this.http.get<Doctor>('https://localhost:7065/Doctor/GetById?id=' + id);
   }
 }
