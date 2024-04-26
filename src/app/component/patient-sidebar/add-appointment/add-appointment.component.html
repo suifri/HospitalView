@@ -2,10 +2,10 @@
 <mat-divider></mat-divider>
 
 
-<mat-dialog-content class="custom-dialog-content">
+<mat-dialog-content class="custom-dialog-content" [formGroup]="form">
     <mat-form-field>
         <mat-label>Appointmant date</mat-label>
-        <input matInput [matDatepicker]="picker">
+        <input matInput [matDatepicker]="picker" formControlName="date" [min]="today">
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
@@ -13,15 +13,15 @@
     </mat-form-field>
 
         <mat-form-field class="example-full-width">
-          <mat-label>Number</mat-label>
+          <mat-label>Doctor</mat-label>
           <input type="text"
                  placeholder="Pick one"
                  aria-label="Doctor"
                  matInput
-                 [formControl]="myControl"
+                 formControlName="doctorName"
                  [matAutocomplete]="auto">
 
-          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" >
             <mat-option *ngFor="let option of filteredOptions | async; trackBy: trackByFn" [value]="option">
                 {{ option }}
               </mat-option>
@@ -30,7 +30,7 @@
 
         <mat-form-field>
             <mat-label>Appointment hour</mat-label>
-            <input type="number" matInput [formControl]="myControl">
+            <input type="number" matInput formControlName="hourOfAppointment" max="23" min="0">
         </mat-form-field>
 </mat-dialog-content>
 

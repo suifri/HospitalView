@@ -1,4 +1,4 @@
-<app-sidebar *ngIf="userLoggedIn"></app-sidebar>
-<!-- <app-patient-sidebar></app-patient-sidebar> -->
-<!-- <app-doctor-sidebar></app-doctor-sidebar> -->
+<app-sidebar *ngIf= "test.role == admin"></app-sidebar>
+<app-patient-sidebar *ngIf="test.role == patient"></app-patient-sidebar>
+<app-doctor-sidebar *ngIf="test.role == doctor"></app-doctor-sidebar>
 <router-outlet></router-outlet>

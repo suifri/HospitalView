@@ -10,8 +10,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class RegistrationComponent implements OnInit{
 
   duration : string = '2000';
-  conditions: string[] = ['Stable'];
-  bloodTypes: string[] = ['AA'];
+  conditions: string[] = ['Stable', "Critical", "Deteriorating", "Improving", "Post-operative", "Chronic", "Rehabilitation"];
+  bloodTypes: string[] = ['A', 'O', 'B', 'AB'];
 
   firstFormGroup !: FormGroup;
   secondFormGroup !: FormGroup;
@@ -54,7 +54,9 @@ export class RegistrationComponent implements OnInit{
 
   signUp()
   {
-    this.dialogRef.close();//add return value
+    console.log({...this.firstFormGroup.value, ...this.secondFormGroup.value});
+
+    this.dialogRef.close({...this.firstFormGroup.value, ...this.secondFormGroup.value});//add return value
   }
 
   cancelResgistration()

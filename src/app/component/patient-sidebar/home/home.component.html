@@ -15,13 +15,11 @@
 
     <mat-card class="m-3">
         <mat-card-title class="custom-mat-card">
-            <!-- {{patient.patientFName + ' ' + patient.patientLName}} test -->
-            test
+            {{patient.patientFName + ' ' + patient.patientLName}}
         </mat-card-title>
 
         <mat-card-subtitle>
-                <!-- {{patient.condition}} test -->
-                test
+                {{patient.condition}}
         </mat-card-subtitle>
 
         <mat-divider></mat-divider>
@@ -29,25 +27,25 @@
         <div class="row pt-3">
             <div class="col-md-6">
                 <mat-card-content>
-                    <span>Email:</span> <br>
+                    <span>Email: </span>{{patient.email}} <br>
                 </mat-card-content>
 
                 <mat-card-content>
-                    <span>Phone:</span> <br>
+                    <span>Phone: </span>{{patient.phone}} <br>
                 </mat-card-content>
 
                 <mat-card-content>
-                    <span>Admission date:</span> <br>
+                    <span>Admission date: </span> {{patient.admissionDate}}<br>
                 </mat-card-content>
             </div>
         </div>
 
         <div class="col-md-6">
             <mat-card-content>
-                <span> Gender: </span> <br>
-                <span> Blood type: </span> <br>
-                <span>Rhesus:</span> <br>
-                <span>Diagnosis:</span> <br>
+                <span> Gender: </span>{{patient.gender}} <br>
+                <span> Blood type: </span>{{patient.bloodType}} <br>
+                <span>Rhesus:</span> {{patient.rhesus}}<br>
+                <span>Diagnosis:</span> {{patient.diagnosis}} <br>
             </mat-card-content>
         </div>
 

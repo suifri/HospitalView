@@ -9,6 +9,7 @@ import { AuthguardGuard } from './shared/guard/authguard.guard';
 import { HomeComponent } from './component/patient-sidebar/home/home.component';
 import { BillsComponent } from './component/patient-sidebar/bills/bills.component';
 import { DoctorHomeComponent } from './component/doctor-sidebar/doctor-home/doctor-home.component';
+import { SidebarComponent } from './component/dashboard/sidebar/sidebar.component';
 
 const routes: Routes = [
   {path: 'doctorDashboard', children:[
@@ -19,7 +20,7 @@ const routes: Routes = [
     {path:'bills', component: BillsComponent}
   ]},
 {path: 'dashboard', children: [
-  {path: '', redirectTo: 'patient', pathMatch: 'full'},
+  {path: '', component: SidebarComponent},
   {path: 'patient', component: PatientComponent},
   {path: 'patient/:id', component: ViewPatientComponent},
   {path: 'doctor', component: DoctorComponent},

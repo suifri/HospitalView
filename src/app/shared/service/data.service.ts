@@ -15,6 +15,10 @@ export class DataService {
     return this.http.post('https://localhost:7065/Doctor/Add', doctor);
   }
 
+  getDoctorByEmail(email: string)
+  {
+  }
+
   getAllDoctors(){
     return this.http.get<Doctor[]>('https://localhost:7065/Doctor/GetAll');
   }
