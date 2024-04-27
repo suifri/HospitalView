@@ -45,6 +45,7 @@ import { DoctorSidebarComponent } from './component/doctor-sidebar/doctor-sideba
 import { DoctorHomeComponent } from './component/doctor-sidebar/doctor-home/doctor-home.component';
 import { HttpClientModule } from '@angular/common/http';
 import {MatSortModule} from '@angular/material/sort';
+import { PatientChartComponent } from './component/dashboard/patient/patient-chart/patient-chart.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import {MatSortModule} from '@angular/material/sort';
     BillsComponent,
     AddAppointmentComponent,
     DoctorSidebarComponent,
-    DoctorHomeComponent
+    DoctorHomeComponent,
+    PatientChartComponent
   ],
   imports: [
     BrowserModule,

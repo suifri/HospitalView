@@ -1,0 +1,13 @@
+<div id="divChart">
+    <canvas id="myChart"></canvas>
+</div>
+
+<div>
+    <mat-dialog-content [formGroup]="form">
+        <input matInput placeholder="2023" formControlName="year" style="margin-left: 20px;">
+    </mat-dialog-content>
+    
+    <mat-dialog-actions>
+        <button mat-raised-button color="primary" mat-dialog-close (click)="sendYear()" style="margin-left: 20px;">Send</button>
+    </mat-dialog-actions>
+</div>
